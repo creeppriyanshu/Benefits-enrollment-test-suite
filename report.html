@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Benefits Enrollment - Test Execution Report</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 40px; color: #1a1a1a; background: #f7f8fa; }
+  h1 { margin-bottom: 4px; }
+  .meta { color: #555; margin-bottom: 24px; }
+  .summary { display: flex; gap: 16px; margin-bottom: 28px; }
+  .card { padding: 16px 24px; border-radius: 8px; color: white; min-width: 120px; text-align: center; }
+  .total { background: #1F4E78; }
+  .pass { background: #2e7d32; }
+  .fail { background: #c62828; }
+  .card .num { font-size: 28px; font-weight: bold; display: block; }
+  table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e0e0e0; font-size: 14px; }
+  th { background: #1F4E78; color: white; }
+  tr:hover { background: #f1f5fa; }
+  .pass-cell { color: #2e7d32; font-weight: bold; }
+  .fail-cell { color: #c62828; font-weight: bold; }
+</style>
+</head>
+<body>
+  <h1>Benefits Enrollment (H&amp;W) - Test Execution Report</h1>
+  <div class="meta">Generated 2026-07-10 14:28:19</div>
+
+  <div class="summary">
+    <div class="card total"><span class="num">18</span>Total</div>
+    <div class="card pass"><span class="num">18</span>Passed</div>
+    <div class="card fail"><span class="num">0</span>Failed</div>
+  </div>
+
+  <table>
+    <tr>
+      <th>Test ID</th><th>Description</th><th>Endpoint</th><th>Method</th>
+      <th>Expected Status</th><th>Actual Status</th><th>Result</th>
+    </tr>
+    
+    <tr>
+      <td>TC01</td>
+      <td>Eligible active employee passes eligibility check</td>
+      <td>/eligibility/check</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC02</td>
+      <td>Employee still in 30-day waiting period is rejected</td>
+      <td>/eligibility/check</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC03</td>
+      <td>Terminated employee fails eligibility check</td>
+      <td>/eligibility/check</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC04</td>
+      <td>Eligibility check for unknown employee returns 404</td>
+      <td>/eligibility/check</td>
+      <td>POST</td>
+      <td>404</td>
+      <td>404</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC05</td>
+      <td>Spouse dependent is eligible</td>
+      <td>/dependents/E001</td>
+      <td>GET</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC06</td>
+      <td>Child dependent under 26 is eligible</td>
+      <td>/dependents/E001</td>
+      <td>GET</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC07</td>
+      <td>Child dependent aged 27 has aged out</td>
+      <td>/dependents/E004</td>
+      <td>GET</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC08</td>
+      <td>Dependents lookup for unknown employee returns 404</td>
+      <td>/dependents/E999</td>
+      <td>GET</td>
+      <td>404</td>
+      <td>404</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC09</td>
+      <td>Enrollment succeeds inside open enrollment window</td>
+      <td>/enrollment/submit</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC10</td>
+      <td>Enrollment outside window without QLE is rejected</td>
+      <td>/enrollment/submit</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC11</td>
+      <td>Enrollment outside window WITH valid QLE is accepted</td>
+      <td>/enrollment/submit</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC12</td>
+      <td>Enrollment rejected for employee who fails eligibility</td>
+      <td>/enrollment/submit</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC13</td>
+      <td>Enrollment missing plan_id returns 400</td>
+      <td>/enrollment/submit</td>
+      <td>POST</td>
+      <td>400</td>
+      <td>400</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC14</td>
+      <td>Valid life event returns a 30-day SEP window</td>
+      <td>/life-event</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC15</td>
+      <td>Invalid life event type returns 400</td>
+      <td>/life-event</td>
+      <td>POST</td>
+      <td>400</td>
+      <td>400</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC16</td>
+      <td>COBRA eligible for terminated employee with prior enrollment</td>
+      <td>/cobra/check</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC17</td>
+      <td>COBRA not eligible for employer with under 20 employees</td>
+      <td>/cobra/check</td>
+      <td>POST</td>
+      <td>200</td>
+      <td>200</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+    <tr>
+      <td>TC18</td>
+      <td>COBRA check missing termination_date returns 400</td>
+      <td>/cobra/check</td>
+      <td>POST</td>
+      <td>400</td>
+      <td>400</td>
+      <td class="pass-cell">PASS</td>
+    </tr>
+    
+  </table>
+</body>
+</html>
